@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Adrian Sim – IT Helpdesk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EDF1F0; --surface:#FFFFFF; --ink:#0E1F26; --muted:#4F6670; --line:#CBD6D6;
+  --accent:#1F6FEB; --amber:#F5A524; --ok:#17A34A;
+  --term:#0E1F26; --term-ink:#D8E8E6;
+  --sans:'Manrope','Helvetica Neue',Arial,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,Consolas,monospace;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0A1519; --surface:#12232A; --ink:#E6F1EF; --muted:#8FA9B0; --line:#244049;
+    --accent:#6EA8FF; --term:#050C0F; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0A1519; --surface:#12232A; --ink:#E6F1EF; --muted:#8FA9B0; --line:#244049;
+  --accent:#6EA8FF; --term:#050C0F; color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 80px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:1.0625rem;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 clamp(20px,5vw,48px)}
+
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-weight:800;font-size:1.15rem;text-decoration:none;letter-spacing:-.02em;display:flex;align-items:center;gap:10px}
+.logo i{width:10px;height:10px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 4px color-mix(in srgb,var(--ok) 25%,transparent)}
+nav{display:flex;align-items:center;gap:clamp(14px,3vw,28px)}
+nav a{text-decoration:none;font-weight:600;font-size:.93rem;color:var(--muted)}
+nav a:hover{color:var(--ink)}
+#theme{border:1px solid var(--line);background:var(--surface);color:var(--ink);width:38px;height:38px;border-radius:50%;cursor:pointer;font-size:1rem}
+@media (max-width:640px){nav a.hide-sm{display:none}}
+
+/* hero */
+.hero{padding:clamp(40px,7vw,90px) 0 clamp(44px,7vw,80px)}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(28px,5vw,64px);align-items:center}
+h1{font-weight:800;font-size:clamp(2.4rem,6vw,4.6rem);line-height:1;letter-spacing:-.04em;margin:0 0 22px}
+.lede{color:var(--muted);font-size:clamp(1.05rem,1.8vw,1.25rem);margin:0 0 30px;max-width:30em}
+.btns{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-block;padding:13px 24px;border-radius:10px;font-weight:700;text-decoration:none;border:2px solid var(--ink);transition:transform .15s}
+.btn.primary{background:var(--ink);color:var(--bg)}
+.btn:hover{transform:translateY(-2px)}
+.term{background:var(--term);color:var(--term-ink);border-radius:14px;overflow:hidden;box-shadow:0 20px 50px -20px rgba(14,31,38,.55);font-family:var(--mono);font-size:.88rem;line-height:1.7}
+.term .bar{display:flex;gap:7px;padding:12px 16px;background:rgba(255,255,255,.06)}
+.term .bar b{width:11px;height:11px;border-radius:50%;background:#3C5560}
+.term .bar span{margin-left:auto;font-size:.78rem;opacity:.6}
+.term pre{margin:0;padding:18px 20px 24px;min-height:300px;white-space:pre-wrap;word-break:break-word;font:inherit}
+.p{color:var(--amber)}.k{color:#7FD1FF}.g{color:#6BE39A}
+.cur{display:inline-block;width:8px;height:1em;background:var(--amber);vertical-align:-2px;animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr}}
+
+/* sections */
+section{padding:clamp(48px,8vw,96px) 0;border-top:1px solid var(--line)}
+h2{font-weight:800;font-size:clamp(1.8rem,4vw,2.8rem);letter-spacing:-.03em;line-height:1.08;margin:0 0 12px}
+.sub{color:var(--muted);margin:0 0 40px;max-width:36em}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line);border-radius:14px;background:var(--surface);overflow:hidden;margin-bottom:0}
+.stat{padding:26px 24px;border-right:1px solid var(--line)}
+.stat:last-child{border-right:0}
+.stat strong{display:block;font-size:clamp(1.8rem,3.6vw,2.6rem);font-weight:800;letter-spacing:-.03em;line-height:1.1}
+.stat span{color:var(--muted);font-size:.93rem}
+@media (max-width:760px){.stats{grid-template-columns:1fr 1fr}.stat:nth-child(2){border-right:0}.stat:nth-child(-n+2){border-bottom:1px solid var(--line)}}
+
+/* skills */
+.skills{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(18px,3vw,36px)}
+.skills h3{font-size:1.05rem;margin:0 0 12px;padding-bottom:10px;border-bottom:2px solid var(--ink)}
+.skills ul{list-style:none;margin:0;padding:0}
+.skills li{padding:7px 0;border-bottom:1px solid var(--line);font-weight:500}
+@media (max-width:900px){.skills{grid-template-columns:1fr 1fr}}
+@media (max-width:480px){.skills{grid-template-columns:1fr}}
+
+/* projects */
+.projects{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,3vw,28px)}
+.proj{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:14px}
+.proj:nth-child(1){grid-column:1/-1;border-left:6px solid var(--accent)}
+.proj h3{margin:0;font-size:1.4rem;letter-spacing:-.02em}
+.proj p{margin:0;color:var(--muted)}
+.result{font-weight:700;color:var(--ok)}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding:0;list-style:none}
+.tags li{font-family:var(--mono);font-size:.78rem;background:var(--bg);border:1px solid var(--line);padding:4px 10px;border-radius:6px}
+@media (max-width:760px){.projects{grid-template-columns:1fr}}
+
+/* experience */
+.tl{list-style:none;margin:0;padding:0 0 0 26px;border-left:2px solid var(--line)}
+.tl li{position:relative;padding:0 0 34px 8px}
+.tl li::before{content:"";position:absolute;left:-35px;top:7px;width:14px;height:14px;border-radius:50%;background:var(--bg);border:3px solid var(--accent)}
+.tl h3{margin:0;font-size:1.2rem}
+.tl .when{color:var(--muted);font-size:.93rem;margin:2px 0 8px}
+.tl p{margin:0;max-width:40em}
+
+/* certs */
+.certs{display:flex;flex-wrap:wrap;gap:12px;margin:0;padding:0;list-style:none}
+.certs li{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 18px;font-weight:700}
+.certs small{display:block;font-weight:500;color:var(--muted);font-size:.8rem}
+
+/* contact */
+.mail{display:inline-block;font-weight:800;font-size:clamp(1.5rem,6vw,4rem);letter-spacing:-.04em;line-height:1.1;text-decoration:none;border-bottom:.08em solid var(--amber);word-break:break-word}
+.mail:hover{color:var(--accent)}
+.social{display:flex;flex-wrap:wrap;gap:22px;margin:32px 0 0;padding:0;list-style:none}
+.social a{font-weight:600;color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line)}
+.social a:hover{color:var(--ink)}
+footer{padding:28px 0 40px;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <a class="logo" href="#top"><i aria-hidden="true"></i>Adrian P. Sim</a>
+    <nav aria-label="Main">
+      <a href="#skills">Skills</a>
+      <a class="hide-sm" href="#projects">Projects</a>
+      <a class="hide-sm" href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+      <button id="theme" aria-label="Switch light or dark theme" title="Switch theme">◐</button>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <h1>I keep IT support simple, reliable,
+                 and user-focused.</h1>
+        <p class="lede">As a Helpdesk Intern at Lawson Philippines Inc., I provide technical assistance, troubleshoot hardware and software issues, and support users with their day-to-day IT concerns. I’m developing practical skills in troubleshooting, networking, system support, and IT operations.</p>
+        <div class="btns">
+          <a class="btn primary" href="#projects">View my projects</a>
+          <a class="btn" href="#contact">Contact me</a>
+        </div>
+      </div>
+      <div class="term" role="img" aria-label="Terminal showing a short profile of Adrian Sim">
+        <div class="bar"><b></b><b></b><b></b><span>Adrian@ops: ~</span></div>
+        <pre id="out"></pre>
+      </div>
+    </div>
+  </div>
+
+  <section id="stats" style="padding-top:0;border-top:0">
+    <div class="wrap">
+      <div class="stats">
+        <div class="stat"><strong>100%</strong><span>Committed to Learning</span></div>
+        <div class="stat"><strong>50+</strong><span>Users Assisted</span></div>
+        <div class="stat"><strong>10+</strong><span>IT Issues Resolved</span></div>
+        <div class="stat"><strong>1</strong><span>Helpdesk Internship</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <h2>What I work with</h2>
+      <p class="sub">The tools and technologies I use while supporting users and learning IT operations.</p>
+      <div class="skills">
+        <div><h3>IT Support</h3><ul><li>Computer troubleshooting</li><li>Hardware & software setup</li><li>Windows support</li><li>Technical assistance</li></ul></div>
+        <div><h3>Networking</h3><ul><li>Basic LAN & Wi-Fi</li><li>IP addressing</li><li>Routers & switches</li></ul></div>
+        <div><h3>Systems & Software</h3><ul><li>Microsoft 365</li><li>Windows & applications</li><li>Software installation</li><li>System configuration</li></ul></div>
+        <div><h3>Security & support</h3><ul><li>Account & access support</li><li>Basic cybersecurity</li><li>IT documentation</li><li>Helpdesk & user support</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="wrap">
+      <h2>Projects</h2>
+      <p class="sub">A few things I’ve built and the results they delivered.</p>
+      <div class="projects">
+        <article class="proj">
+          <h3>IT Support & Troubleshooting</h3>
+          <p>Assisted employees with hardware, software, and basic network-related issues, helping resolve technical concerns and maintain smooth daily operations.</p>
+          <p class="result">Improved troubleshooting and user support skills</p>
+          <ul class="tags"><li>Hardware Software </li><li>Troubleshooting</li><li>Helpdesk</li></ul>
+        </article>
+        <article class="proj">
+          <h3>Computer Setup & Maintenance</h3>
+          <p>Helped set up, configure, and maintain computers and IT equipment for employees, including installing applications and performing basic system checks.</p>
+          <p class="result">Supported reliable day-to-day IT operations</p>
+          <ul class="tags"><li>Windows</li><li>Hardware Software</li><li>Installation</li></ul>
+        </article>
+        <article class="proj">
+          <h3>User & Technical Assistance</h3>
+          <p>Provided hands-on assistance to users with common technical concerns, documented issues, and escalated more complex problems when necessary.</p>
+          <p class="result">Developed professional IT support and communication skills</p>
+          <ul class="tags"><li>IT Support</li><li>Networking</li><li>Documentation</li><li>Customer Service</li></ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="wrap">
+      <h2>Experience</h2>
+      <p class="sub" style="margin-bottom:36px">Where I’ve worked, newest first.</p>
+      <ol class="tl">
+        <li><h3>IT Intern · Lawson Philippines Inc.</h3><div class="when">2026 – Present</div><p>support   Hardware, Software, Windows
+network   LAN, Wi-Fi, IP, Troubleshooting
+systems   Microsoft 365, Installation, Configuration
+security  Account Access, Basic Security, IT Support.</p></li>
+      
+      </ol>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <h2>Need IT help or a new hire?</h2>
+      <p class="sub">I’m open to full‑time roles and contract work.</p>
+      <a class="mail" href="mailto:simadrian3@gmail.com">simadrian3@gmail.com</a>
+      <ul class="social">
+        <li><a href="https://www.linkedin.com/in/adrian-sim-899969345/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        <li><a href="https://github.com/SIMBELEM" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+        <li><a href="d:\Downloads\SIM, ADRIAN P. - STUDENT CV.pdf" target="_blank" download>Download résumé</a></li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap">© 2026 Adrian Sim. All rights reserved.</div></footer>
+
+<script>
+(function(){
+  var root=document.documentElement, btn=document.getElementById('theme');
+  try{var t=localStorage.getItem('theme'); if(t) root.setAttribute('data-theme',t);}catch(e){}
+  btn.addEventListener('click',function(){
+    var dark=root.getAttribute('data-theme')==='dark' ||
+      (!root.getAttribute('data-theme') && matchMedia('(prefers-color-scheme: dark)').matches);
+    var next=dark?'light':'dark';
+    root.setAttribute('data-theme',next);
+    try{localStorage.setItem('theme',next);}catch(e){}
+  });
+
+  var out=document.getElementById('out');
+  var script=[
+    ['<span class="p">$</span> whoami','Adrian Sim — systems &amp; IT Helpdesk, Networking, Software, Hardware'],
+    ['<span class="p">$</span> uptime --intern','Learning & supporting IT operations </span> through hands-on experience'],
+    ['<span class="p">$</span> cat skills.txt','<span class="k">support</span> Hardware, Software, Windows\n<span class="k">network</span>  LAN, Wi-Fi, IP, Troubleshooting\n<span class="k">system</span> Microsoft 365, Installation, Configuration\n<span class="k">security</span> Account Access, Basic Security, IT Support'],
+    ['<span class="p">$</span> status','<span class="g">●</span> available for new work']
+  ];
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function plain(h){var d=document.createElement('div');d.innerHTML=h;return d.textContent;}
+  if(reduce){
+    out.innerHTML=script.map(function(s){return s[0]+'\n'+s[1];}).join('\n\n')+'\n\n<span class="p">$</span> <span class="cur"></span>';
+    return;
+  }
+  var html='',li=0;
+  function next(){
+    if(li>=script.length){out.innerHTML=html+'<span class="p">$</span> <span class="cur"></span>';return;}
+    var cmd=script[li][0],txt=plain(cmd).replace(/^\$\s*/,''),n=0;
+    var prefix='<span class="p">$</span> ';
+    (function type(){
+      out.innerHTML=html+prefix+txt.slice(0,n)+'<span class="cur"></span>';
+      if(n++<txt.length){setTimeout(type,45);}
+      else{setTimeout(function(){html+=prefix+txt+'\n'+script[li][1]+'\n\n';li++;out.innerHTML=html;setTimeout(next,350);},300);}
+    })();
+  }
+  next();
+})();
+</script>
+</body>
+</html>
